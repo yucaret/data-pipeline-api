@@ -1,2 +1,3 @@
 # data-pipeline-api
-Pipeline que carga archivos csv y los guarda en base de datos
+
+Proyecto base para un pipeline de datos usando FastAPI y PostgreSQL. Listo para desplegar en Railway.
