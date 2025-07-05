@@ -16,7 +16,7 @@ def print_versions():
     print(f"- pandas: {pandas.__version__}")
     print(f"- pydantic: {pydantic.__version__}")
     print(f"- psycopg2: {psycopg2.__version__}")
-    print(f"- python-dotenv: {dotenv.__version__}")
+    #print(f"- python-dotenv: {dotenv.__version__}")
     print(f"- uvicorn: {uvicorn.__version__}")
 
 print_versions()
