@@ -6,7 +6,7 @@ import os
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")
 
-print("Conexión a base de datos:", DATABASE_URL)
+print("Conexion a base de datos:", DATABASE_URL)
 
 engine = create_engine(DATABASE_URL)
 
