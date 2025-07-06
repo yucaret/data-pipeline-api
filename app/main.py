@@ -8,6 +8,7 @@ import uvicorn
 from fastapi import FastAPI
 from app.routers import upload, batch
 from app.database import engine, Base
+from app import models
 
 def print_versions():
     print("Librerias instaladas:")
