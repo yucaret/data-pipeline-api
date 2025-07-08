@@ -73,6 +73,7 @@ FastAPI Backend
 │   │   ├── upload.py        # Endpoint de carga
 │   │   └── queries.py       # Endpoints analíticos
 ├── metadata/
+│   ├── types_config.py      # Tipo de dato según motor de base de datos
 │   └── metadatatables.csv   # Estructura de las tablas
 ├── main.py                  # Punto de entrada de la aplicación
 └── requirements.txt         # Dependencias
