@@ -7,13 +7,8 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
 
     print("crud.py --> validate_and_convert_dataframe --> df: " + str(df) + "; type_: " + str(type_) + "; has_header: " + str(has_header))
     
-    print("crud.py --> validate_and_convert_dataframe --> df:" + str(df.head(5)))
-    
     if type_ not in list(tables_metadata.keys()):
         raise ValueError(f"Tabla no reconocida: {type_}")
-    
-    print("crud.py --> validate_and_convert_dataframe --> tables_metadata.keys():" + str(tables_metadata.keys()))
-    print("crud.py --> validate_and_convert_dataframe --> tables_metadata.values():" + str(tables_metadata.values()))
     
     # Obtener metadata de la tabla
     table_meta = []
@@ -77,7 +72,8 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
     
     if pk_cols and df.duplicated(subset=pk_cols).any():
         raise ValueError(f"Valores duplicados en clave primaria: {pk_cols}")
-        
+    
+    # Forzamos a sacar NAN NAT
     df = df.replace({pd.NA: None})
     df = df.where(pd.notnull(df), None)
     df = df.astype(object)
