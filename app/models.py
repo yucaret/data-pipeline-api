@@ -3,7 +3,7 @@ import os
 #from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy import Column, ForeignKey
 from app.database import Base
-from app.types_config import TYPES_BY_DB
+from app.metadata.types_config import TYPES_BY_DB
 
 # Motor de Base de datos, en rail esta como una variable, en local jala de .env
 CURRENT_DB = os.getenv("DATABASE_ENGINE", "postgresql")
