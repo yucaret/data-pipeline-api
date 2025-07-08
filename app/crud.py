@@ -18,7 +18,7 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
     # Validación de columnas
     if has_header:
         if list(df.columns) != expected_columns:
-            raise ValueError(f"Se esperaban columnas en orden: {expected_columns}, pero se recibió: {list(df.columns)}")
+            raise ValueError(f"Se esperaban columnas en orden: {expected_columns}, se recibio: {list(df.columns)}")
     else:
         df.columns = expected_columns  # Asignar columnas desde metadata
 
@@ -38,7 +38,7 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
             if max_len and max_len.isdigit():
                 df[col_name] = df[col_name].astype(str)
                 if df[col_name].map(len).max() > int(max_len):
-                    raise ValueError(f"Valores en columna '{col_name}' superan longitud máxima de {max_len}.")
+                    raise ValueError(f"Valores en columna '{col_name}' superan longitud maxima de {max_len}.")
         elif dtype == "datetime":
             try:
                 df[col_name] = pd.to_datetime(df[col_name])
@@ -47,6 +47,7 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
 
     # Validación de claves primarias duplicadas
     pk_cols = [c["columns"] for c in table_meta if c["keytype"].upper() == "PK"]
+    
     if pk_cols and df.duplicated(subset=pk_cols).any():
         raise ValueError(f"Valores duplicados en clave primaria: {pk_cols}")
 
