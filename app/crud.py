@@ -49,6 +49,7 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
         if dtype == "integer":
             try:
                 df[col_name] = pd.to_numeric(df[col_name], downcast="integer")
+                df[col_name] = df[col_name].fillna(0).astype(int)
                 df[col_name] = df[col_name].where(df[col_name].notna(), None)
             except Exception:
                 raise ValueError(f"La columna '{col_name}' es de enteros.")
