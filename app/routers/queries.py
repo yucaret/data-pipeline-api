@@ -31,7 +31,8 @@ def get_hires_by_quarter():
         #return JSONResponse(content=rows)
         
         result = db.execute(query)
-        rows = result.mappings().all()
+        #rows = result.mappings().all()
+        rows = [dict(row) for row in result.mappings().all()]
         return JSONResponse(content=rows)        
     finally:
         db.close()
@@ -62,7 +63,8 @@ def get_departments_above_mean():
         #return JSONResponse(content=rows)
         
         result = db.execute(query)
-        rows = result.mappings().all()
+        #rows = result.mappings().all()
+        rows = [dict(row) for row in result.mappings().all()]
         return JSONResponse(content=rows)     
     finally:
         db.close()
