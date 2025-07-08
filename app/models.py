@@ -21,7 +21,7 @@ with open(METADATA_CSV_PATH, newline='', encoding='utf-8') as csvfile:
     for row in reader:
         table_name = row["table"]
         
-        if table_name not in tables:
+        if table_name not in tables_metadata:
             tables_metadata[table_name] = []
         
         tables_metadata[table_name].append(row)
