@@ -100,6 +100,13 @@ uvicorn main:app --reload
 
 La aplicación puede desplegarse en plataformas como Railway o Render. Asegúrate de configurar las variables de entorno para conectar a la base de datos.
 
+Esta solución fue desplegada en railway, una plataforma comoda e intuitiva para configurar, conecta a github y se añade comoponentes como es el caso de posgresql, redis, etc.
+![image](https://github.com/user-attachments/assets/46976786-14e2-48a0-8b8b-62af63f1bf2e)
+
+Para probar el api ingresas la link: https://data-pipeline-api-production.up.railway.app/docs#/
+
+![image](https://github.com/user-attachments/assets/96b9f4d2-6aee-4559-9e30-b1d90d40b2a9)
+
 ---
 
 ## Consideraciones Técnicas
