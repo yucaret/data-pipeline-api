@@ -72,6 +72,9 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
     
     if pk_cols and df.duplicated(subset=pk_cols).any():
         raise ValueError(f"Valores duplicados en clave primaria: {pk_cols}")
+        
+        
+    df = df.where(pd.notnull(df), None)
 
     # Crear objetos de la clase dinámica
     ModelClass = dynamic_models[type_]
