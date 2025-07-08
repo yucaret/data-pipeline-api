@@ -63,10 +63,13 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
         elif dtype == "datetime":
             try:
                 print("crud.py --> validate_and_convert_dataframe --> elif dtype == datetime: --> df:" + str(df[df[col_name].isnull()]))
-                df[col_name] = pd.to_datetime(df[col_name])
-                df[col_name] = df[col_name].where(df[col_name].isnull(), None)
                 
+                df[col_name] = pd.to_datetime(df[col_name], errors='coerce')
                 print("crud.py --> validate_and_convert_dataframe --> df[col_name] = pd.to_datetime(df[col_name]) --> df:" + str(df[df[col_name].isnull()]))
+                
+                df[col_name] = df[col_name].where(df[col_name].notna(), None)
+                print("crud.py --> validate_and_convert_dataframe --> df[col_name] = df[col_name].where(df[col_name].isnull(), None) --> df:" + str(df[df[col_name].isnull()]))
+                
             except Exception:
                 raise ValueError(f"No se pudo convertir '{col_name}' a datetime.")
 
