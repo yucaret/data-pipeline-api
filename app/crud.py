@@ -78,10 +78,8 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
     if pk_cols and df.duplicated(subset=pk_cols).any():
         raise ValueError(f"Valores duplicados en clave primaria: {pk_cols}")
         
-    # Convertir NaN/NaT a None
+    df = df.replace({pd.NA: None})
     df = df.where(pd.notnull(df), None)
-    
-    # Convertir todos los tipos a nativos de Python
     df = df.astype(object)
 
     # Crear objetos de la clase dinámica
