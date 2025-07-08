@@ -46,11 +46,12 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
         if not allow_null and df[col_name].isnull().any():
             raise ValueError(f"La columna '{col_name}' no permite valores nulos.")
 
-        if dtype == "integer":
-            try:
-                df[col_name] = pd.to_numeric(df[col_name], downcast="integer")
-            except Exception:
-                raise ValueError(f"La columna '{col_name}' es de enteros.")
+        #if dtype == "integer":
+        #    try:
+        #        df[col_name] = pd.to_numeric(df[col_name], downcast="integer")
+        #    except Exception:
+        #        raise ValueError(f"La columna '{col_name}' es de enteros.")
+                
         elif dtype == "string":
             max_len = col_meta.get("large")
             
@@ -64,10 +65,10 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
             try:
                 #df[col_name] = pd.to_datetime(df[col_name], errors='coerce')
                 
-                print("crud.py --> validate_and_convert_dataframe --> df[col_name] = pd.to_datetime(df[col_name]) --> df:" + str(df[df[col_name].isnull()]))
+                #print("crud.py --> validate_and_convert_dataframe --> df[col_name] = pd.to_datetime(df[col_name]) --> df:" + str(df[df[col_name].isnull()]))
                 
                 df[col_name] = df[col_name].where(df[col_name].notna(), None)
-                print("crud.py --> validate_and_convert_dataframe --> df[col_name] = df[col_name].where(df[col_name].isnull(), None) --> df:" + str(df[df[col_name].isnull()]))
+                #print("crud.py --> validate_and_convert_dataframe --> df[col_name] = df[col_name].where(df[col_name].isnull(), None) --> df:" + str(df[df[col_name].isnull()]))
                 
             except Exception:
                 raise ValueError(f"No se pudo convertir '{col_name}' a datetime.")
