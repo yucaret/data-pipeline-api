@@ -31,7 +31,7 @@ def get_hires_by_quarter():
         #return JSONResponse(content=rows)
         
         result = db.execute(query)
-	rows = result.mappings().all()
+        rows = result.mappings().all()
         return JSONResponse(content=rows)        
     finally:
         db.close()
