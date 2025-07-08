@@ -6,7 +6,7 @@ import psycopg2
 import dotenv
 import uvicorn
 from fastapi import FastAPI
-from app.routers import upload, batch
+from app.routers import upload, batch, queries
 from app.database import engine, Base
 from app import models
 
@@ -22,11 +22,10 @@ def print_versions():
 
 print_versions()
 
-#Base.metadata.drop_all(bind=engine)
-
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 app.include_router(upload.router)
 app.include_router(batch.router)
+app.include_router(queries.router)
