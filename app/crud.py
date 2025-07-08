@@ -58,7 +58,7 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
             
             if max_len and max_len.isdigit():
                 if df[col_name].map(len).max() > int(max_len):
-                    raise ValueError(f"Valores en columna '{col_name}' superan longitud máxima de {max_len}.")
+                    raise ValueError(f"Valores en columna '{col_name}' superan longitud maxima de {max_len}.")
         
         elif dtype == "datetime":
             try:
