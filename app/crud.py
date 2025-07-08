@@ -20,7 +20,7 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
     for sublist in tables_metadata.values():
         for row in sublist:
             if row['table'] == type_:
-            table_meta.append(row) # Si coincide a table_meta
+                table_meta.append(row) # Si coincide a table_meta
     
     if not table_meta:
         raise ValueError(f"No se encontro metadata para la tabla: {type_}")
