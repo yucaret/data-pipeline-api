@@ -47,17 +47,24 @@ FastAPI Backend
 ### 1. Carga de archivos
 **Endpoint:** `POST /upload`  
 - Acepta archivos CSV (empleados, departamentos o puestos).
-- Determina la estructura según el parámetro `type`.
+- Determina la estructura según el parámetro `type_` (valores posibles a usar employees, jobs o departments).
+- Permite el ingreso de archivos con o sin cabecera con el parámetro `has_header` (True o False).
 - Valida los datos contra el archivo `metadata/metadatatables.csv`.
 - Convierte dinámicamente los tipos de datos.
 - Inserta los datos válidos en la base de datos.
+
+![image](https://github.com/user-attachments/assets/2e603493-4cd6-410f-91c8-ef9bc17edf00)
 
 ### 2. Consultas Analíticas
 **Endpoint:** `GET /analytics/hires_by_quarter`  
 - Devuelve contrataciones por trimestre agrupadas por departamento y puesto.
 
+![image](https://github.com/user-attachments/assets/4f54fbc5-b781-47fe-b08a-ff5356721073)
+
 **Endpoint:** `GET /analytics/departments_above_mean`  
 - Devuelve los departamentos con contrataciones por encima del promedio en 2021.
+
+![image](https://github.com/user-attachments/assets/2469d9f1-526d-4660-869d-b2bf7e01c33f)
 
 ---
 
