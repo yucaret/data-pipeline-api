@@ -1,17 +1,23 @@
 import csv
 import os
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+#from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, ForeignKey
 from app.database import Base
+from app.types_config import TYPES_BY_DB
+
+# Motor de Base de datos, en rail esta como una variable, en local jala de .env
+CURRENT_DB = os.getenv("DATABASE_ENGINE", "postgresql")
 
 # Ruta del CSV
 METADATA_CSV_PATH = os.path.join(os.path.dirname(__file__), "metadata", "metadatatables.csv")
 
 # Tipos de dato validos
-SQLALCHEMY_TYPES = {
-    "Integer": Integer,
-    "String": String,
-    "DateTime": DateTime
-}
+#SQLALCHEMY_TYPES = {
+#    "Integer": Integer,
+#    "String": String,
+#    "DateTime": DateTime
+#}
+SQLALCHEMY_TYPES = TYPES_BY_DB[CURRENT_DB]
 
 # Agrupar columnas por tabla
 tables_metadata = {}
@@ -44,20 +50,20 @@ for table_name, columns in tables_metadata.items():
 
         base_type = SQLALCHEMY_TYPES[col_type_str]
 
-        # Si es String, considerar tamaño
+        # Si es String, considerar tamanho
         if col_type_str == "String" and col["large"]:
             col_type = base_type(int(col["large"]))
         else:
             col_type = base_type
 
-        # Nullable
+        # Es Nulo
         col_kwargs["nullable"] = (col["allownull"].lower() == "yes")
 
-        # Primary Key
+        # Es Primary key
         if col["keytype"].upper() == "PK":
             col_kwargs["primary_key"] = True
 
-        # Foreign Key
+        # Es foreign Key
         if col["keytype"].upper() == "FK":
             ref_table = col["foreingtable"]
             if not ref_table:
