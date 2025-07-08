@@ -16,7 +16,11 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
     print("crud.py --> validate_and_convert_dataframe --> tables_metadata.values():" + str(tables_metadata.values()))
     
     # Obtener metadata de la tabla
-    table_meta = [row for row in tables_metadata if row['table'] == type_]
+    table_meta = []
+    for sublist in tables_metadata.values():
+        for row in sublist:
+            if row['table'] == type_:
+            table_meta.append(row) # Si coincide a table_meta
     
     if not table_meta:
         raise ValueError(f"No se encontro metadata para la tabla: {type_}")
@@ -35,18 +39,27 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
         col_name = col_meta['columns']
         dtype = col_meta['datatype'].lower()
         allow_null = col_meta['allownull'].lower() == "yes"
+        
+        if col_name not in df.columns:
+            raise ValueError(f"La columna '{col_name}' no esta en el archivo cargado.")
 
         if not allow_null and df[col_name].isnull().any():
             raise ValueError(f"La columna '{col_name}' no permite valores nulos.")
 
-        if dtype == "integer" and not pd.api.types.is_integer_dtype(df[col_name]):
-            raise ValueError(f"La columna '{col_name}' debe ser de tipo Integer.")
+        if dtype == "integer":
+            try:
+                df[col_name] = pd.to_numeric(df[col_name], downcast="integer")
+            except Exception:
+                raise ValueError(f"La columna '{col_name}' es de enteros.")
         elif dtype == "string":
             max_len = col_meta.get("large")
+            
+            df[col_name] = df[col_name].fillna("").astype(str)
+            
             if max_len and max_len.isdigit():
-                df[col_name] = df[col_name].astype(str)
                 if df[col_name].map(len).max() > int(max_len):
-                    raise ValueError(f"Valores en columna '{col_name}' superan longitud maxima de {max_len}.")
+                    raise ValueError(f"Valores en columna '{col_name}' superan longitud máxima de {max_len}.")
+        
         elif dtype == "datetime":
             try:
                 df[col_name] = pd.to_datetime(df[col_name])
