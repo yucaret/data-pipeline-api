@@ -11,7 +11,7 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
     table_meta = [row for row in tables_metadata if row['table'] == type_]
     
     if not table_meta:
-        raise ValueError(f"No se encontró metadata para la tabla: {type_}")
+        raise ValueError(f"No se encontro metadata para la tabla: {type_}")
 
     expected_columns = [col['columns'] for col in table_meta]
 
