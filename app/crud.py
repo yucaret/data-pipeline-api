@@ -12,10 +12,11 @@ def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: boo
     if type_ not in list(tables_metadata.keys()):
         raise ValueError(f"Tabla no reconocida: {type_}")
     
+    print("crud.py --> validate_and_convert_dataframe --> tables_metadata.keys():" + str(tables_metadata.keys()))
+    print("crud.py --> validate_and_convert_dataframe --> tables_metadata.values():" + str(tables_metadata.values()))
+    
     # Obtener metadata de la tabla
     table_meta = [row for row in tables_metadata if row['table'] == type_]
-    
-    print("crud.py --> validate_and_convert_dataframe --> table_meta:" + str(table_meta))
     
     if not table_meta:
         raise ValueError(f"No se encontro metadata para la tabla: {type_}")
