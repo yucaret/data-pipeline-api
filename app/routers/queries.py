@@ -25,9 +25,14 @@ def get_hires_by_quarter():
             GROUP BY d.department_name, j.job_name
             ORDER BY d.department_name, j.job_name
         """)
+        
+        #result = db.execute(query)
+        #rows = [dict(row) for row in result.fetchall()]
+        #return JSONResponse(content=rows)
+        
         result = db.execute(query)
-        rows = [dict(row) for row in result.fetchall()]
-        return JSONResponse(content=rows)
+	rows = result.mappings().all()
+        return JSONResponse(content=rows)        
     finally:
         db.close()
 
@@ -51,8 +56,13 @@ def get_departments_above_mean():
             WHERE h.hired > a.avg_hired
             ORDER BY h.hired DESC
         """)
+        
+        #result = db.execute(query)
+        #rows = [dict(row) for row in result.fetchall()]
+        #return JSONResponse(content=rows)
+        
         result = db.execute(query)
-        rows = [dict(row) for row in result.fetchall()]
-        return JSONResponse(content=rows)
+        rows = result.mappings().all()
+        return JSONResponse(content=rows)     
     finally:
         db.close()
