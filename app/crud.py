@@ -4,11 +4,18 @@ from app.models import dynamic_models, tables_metadata
 from typing import List
 
 def validate_and_convert_dataframe(df: pd.DataFrame, type_: str, has_header: bool = True) -> List[object]:
+
+    print("crud.py --> validate_and_convert_dataframe --> df: " + str(df) + "; type_: " + str(type_) + "; has_header: " + str(has_header))
+    
+    print("crud.py --> validate_and_convert_dataframe --> df:" + str(df.head(5)))
+    
     if type_ not in list(tables_metadata.keys()):
         raise ValueError(f"Tabla no reconocida: {type_}")
     
     # Obtener metadata de la tabla
     table_meta = [row for row in tables_metadata if row['table'] == type_]
+    
+    print("crud.py --> validate_and_convert_dataframe --> table_meta:" + str(table_meta))
     
     if not table_meta:
         raise ValueError(f"No se encontro metadata para la tabla: {type_}")
