@@ -11,8 +11,6 @@ async def upload_file(type_: str = Form(...), file: UploadFile = File(...), has_
 
     print("upload.py --> upload_file --> type_: " + str(type_) + "; file: " + str(file) + "; has_header: " + str(has_header))
     
-    print("upload.py --> upload_file --> list(tables_metadata.keys()): " + str(list(tables_metadata.keys())))
-
     if type_ not in list(tables_metadata.keys()):
         raise HTTPException(status_code=400, detail=f"Tabla no reconocida. Usar uno de: {list(tables_metadata.keys())}")
 
@@ -28,8 +26,6 @@ async def upload_file(type_: str = Form(...), file: UploadFile = File(...), has_
     except ValueError as ve:
         raise HTTPException(status_code=400, detail=str(ve))
         
-    print("upload.py --> upload_file --> objects = validate_and_convert_dataframe(df, type_, has_header)")
-
     try:
         insert_objects_in_db(objects)
     except IntegrityError:
@@ -37,6 +33,4 @@ async def upload_file(type_: str = Form(...), file: UploadFile = File(...), has_
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error interno: {str(e)}")
         
-    print("upload.py --> upload_file --> insert_objects_in_db(objects)")
-
     return {"message": f"{len(objects)} registros insertados en {type} exitosamente."}
