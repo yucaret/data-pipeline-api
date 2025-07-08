@@ -1,1 +1,10 @@
-
+table,columns,datatype,large,keytype,foreingtable,allownull
+employees,id,Integer,,PK,,no
+employees,employee_name,String,,,,yes
+employees,datetime,DateTime,,,,yes
+employees,department_id,Integer,,FK,departments,yes
+employees,job_id,Integer,,FK,jobs,yes
+jobs,id,Integer,,PK,,no
+jobs,job_name,String,250,,,yes
+departments,id,Integer,,PK,,no
+departments,department_name,String,250,,,yes
