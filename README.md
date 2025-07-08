@@ -111,4 +111,4 @@ La aplicación puede desplegarse en plataformas como Railway o Render. Asegúrat
 
 ## Autor
 
-Jorge Vicente
+Jorge Eduardo Vicente Hernández
