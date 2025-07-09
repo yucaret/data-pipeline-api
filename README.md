@@ -85,7 +85,13 @@ FastAPI Backend
 ├── main.py                  # Punto de entrada de la aplicación
 └── requirements.txt         # Dependencias
 ```
+---
 
+## Diseño
+
+```
+![image](https://github.com/user-attachments/assets/5dc3f355-fd22-4fa9-b82a-288dffbbf147)
+```
 ---
 
 ## Cómo ejecutar localmente
