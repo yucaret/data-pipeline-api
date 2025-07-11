@@ -22,6 +22,10 @@ def print_versions():
 
 print_versions()
 
+#Borrar Todo
+#Base.metadata.drop_all(bind=engine)
+
+#Creamos en base a metadata
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
